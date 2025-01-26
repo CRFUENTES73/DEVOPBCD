@@ -149,7 +149,7 @@ do sh spanning-tree vlan 1
 @A1 A2
 Config t              
 spanning-tree mode pvst
-spanning-tree vlan 1-100 priority 61440
+spanning-tree vlan 1-999 priority 61440
 do sh spanning-tree vlan 1
 
 TASK9.1: STP port states. 802.1D states.
@@ -183,14 +183,14 @@ config t
 spanning-tree Mode Rapid-pvst
 spanning-tree BackBoneFast
 spanning-tree portfast bpduguard default
-Int Range fa0/1-8
+Int e1/0
    spanning-tree Portfast
 @BABA/d2/a1/a2:
 config t
 spanning-tree Mode Rapid-pvst
 spanning-tree UplinkFast
 spanning-tree portfast bpduguard default
-Int Range fa0/1-8
+Int e1/0
   spanning-tree Portfast
 end
 
@@ -200,16 +200,16 @@ Make FORCEs all CPU/Instances work to protect VLANs, cpu0 = is working
 step1: sync all Vlans with VTP:vlanTrunkingProtocol:
 TAAS/BABA: d1/d2:
 config t
-vtp domain ccna
-vtp password pass
+vtp domain panasiatic
+vtp password panasiatic
 vtp mode server
 vtp version 2
 exit
 
 a1/a2: access SW
 config t
-vtp domain ccna
-vtp password pass
+vtp domain panasiatic
+vtp password panasiatic
 vtp mode client
 vtp version 1
 exit
@@ -244,7 +244,7 @@ do sh spanning-tree mst configuration
 
 TASK14: MAKE YOUR OWN SUPERMAN BOSSING:
 
-
+!LOAD BALANCE
 @Taas: Make Taas RootBridge again:/d1
 config t
 spanning-tree mst 0 root primary
@@ -510,10 +510,10 @@ Int Range E1/2,E1/3
 @d2
 config t
 Int Range E0/0,E0/3
- channel-group 1 mode active
+ channel-group 5 mode active
  channel-protocol Lacp
 Int Range E0/1,E0/2
- channel-group 2 mode active
+ channel-group 4 mode active
  channel-protocol Lacp
 Int Range E1/2,E1/3
  channel-group 3 mode active
@@ -531,7 +531,7 @@ Int Range E1/0,E0/3
 a2:
 config t
 Int Range E0/0,E0/3
- channel-group 1 mode active
+ channel-group 5 mode active
  channel-protocol Lacp
 Int Range E0/1,E0/2
  channel-group 2 mode active
